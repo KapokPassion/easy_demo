@@ -68,7 +68,7 @@
 				if (self.form.useremail != "" && self.form.userpwd != "") {
 					self.$axios({
 						method:'post',
-						url: 'http://127.0.0.1:10520/api/user/login',
+						url: 'http://47.106.71.244:10520/api/user/login',
 						data: {
 							email: self.form.useremail,
 							password: md5(self.form.userpwd)
@@ -78,6 +78,7 @@
 						switch(res.data){
 							case 0: 
 								alert("登陆成功！");
+								this.$router.push('/home');
 								break;
 							case -1:
 								this.emailError = true;
@@ -99,7 +100,7 @@
 				if(self.form.username != "" && self.form.useremail != "" && self.form.userpwd != ""){
 					self.$axios({
 						method:'post',
-						url: 'http://127.0.0.1:10520/api/user/add',
+						url: 'http://47.106.71.244:10520/api/user/add',
 						data: {
 							username: self.form.username,
 							email: self.form.useremail,
