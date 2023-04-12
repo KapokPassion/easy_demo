@@ -71,7 +71,7 @@
 						url: 'http://118.26.104.19:10520/api/user/login',
 						data: {
 							username: self.form.username,
-							password: md5(self.form.userpwd)
+							password: self.form.userpwd
 						}
 					})
 					.then( res => {
@@ -104,7 +104,7 @@
 						data: {
 							username: self.form.username,
 							email: self.form.useremail,
-							password: md5(self.form.userpwd)
+							password: self.form.userpwd
 						}
 					})
 					.then( res => {
