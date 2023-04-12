@@ -6,9 +6,9 @@
 					<div class="btitle">账户登录</div>
 					<div class="bform">
 						<input type="text" placeholder="用户名" v-model="form.username">
-						<span class="errTips" v-if="usernameError">* 用户名填写错误 *</span>
+						<span class="errTips" v-if="emailError">* 用户名填写错误 *</span>
 						<input type="password" placeholder="密码" v-model="form.userpwd">
-						<span class="errTips" v-if="passwordError">* 密码填写错误 *</span>
+						<span class="errTips" v-if="emailError">* 密码填写错误 *</span>
 					</div>
 					<button class="bbutton" @click="login">登录</button>
 				</div>
