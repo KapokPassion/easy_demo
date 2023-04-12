@@ -2,7 +2,7 @@
 	<div class="login-register">
 		<div class="contain">
 			<div class="big-box" :class="{active:isLogin}">
-				<div class="big-contain" key="bigContainLogin" v-if="isLogin">
+				<div class="big-contain" key="bigContainLogin">
 					<div class="btitle">账户登录</div>
 					<div class="bform">
 						<input type="text" placeholder="用户名" v-model="form.username">
