@@ -5,8 +5,8 @@
 				<div class="big-contain" key="bigContainLogin" v-if="isLogin">
 					<div class="btitle">账户登录</div>
 					<div class="bform">
-						<input type="email" placeholder="邮箱" v-model="form.useremail">
-						<span class="errTips" v-if="emailError">* 邮箱填写错误 *</span>
+						<input type="text" placeholder="用户名" v-model="form.username">
+						<span class="errTips" v-if="emailError">* 用户名填写错误 *</span>
 						<input type="password" placeholder="密码" v-model="form.userpwd">
 						<span class="errTips" v-if="emailError">* 密码填写错误 *</span>
 					</div>
@@ -46,7 +46,7 @@
 		data(){
 			return {
 				isLogin:false,
-				emailError: false,
+				usernameError: false,
 				passwordError: false,
 				existed: false,
 				form:{
@@ -65,12 +65,12 @@
 			},
 			login() {
 				const self = this;
-				if (self.form.useremail != "" && self.form.userpwd != "") {
+				if (self.form.username != "" && self.form.userpwd != "") {
 					self.$axios({
 						method:'post',
 						url: 'http://118.26.104.19:10520/api/user/login',
 						data: {
-							email: self.form.useremail,
+							username: self.form.username,
 							password: md5(self.form.userpwd)
 						}
 					})
@@ -81,7 +81,7 @@
 								this.$router.push('/home');
 								break;
 							case -1:
-								this.emailError = true;
+								this.usernameError = true;
 								break;
 							case 1:
 								this.passwordError = true;
