@@ -4,6 +4,6 @@ module.exports = {
         user: 'root',
         password: '!Pw12123',
         port: '3306',
-        database: 'login'
+        database: 'healthcare'
     }
 }

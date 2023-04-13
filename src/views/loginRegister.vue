@@ -2,7 +2,7 @@
 	<div class="login-register">
 		<div class="contain">
 			<div class="big-box" :class="{active:isLogin}">
-				<div class="big-contain" key="bigContainLogin">
+				<div class="big-contain" key="bigContainLogin" v-if="isLogin">
 					<div class="btitle">账户登录</div>
 					<div class="bform">
 						<input type="text" placeholder="用户名" v-model="form.username">
@@ -68,7 +68,7 @@
 				if (self.form.username != "" && self.form.userpwd != "") {
 					self.$axios({
 						method:'post',
-						url: 'http://118.26.104.19:10520/api/user/login',
+						url: 'http://localhost:10520/api/user/login',
 						data: {
 							username: self.form.username,
 							password: self.form.userpwd
@@ -100,7 +100,8 @@
 				if(self.form.username != "" && self.form.useremail != "" && self.form.userpwd != ""){
 					self.$axios({
 						method:'post',
-						url: 'http://118.26.104.19:10520/api/user/add',
+						// url: 'http://118.26.104.19:10520/api/user/add',
+						url: 'http://localhost:10520/api/user/add',
 						data: {
 							username: self.form.username,
 							email: self.form.useremail,
