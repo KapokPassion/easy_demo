@@ -68,7 +68,7 @@
 				if (self.form.username != "" && self.form.userpwd != "") {
 					self.$axios({
 						method:'post',
-						url: 'http://localhost:10520/api/user/login',
+						url: 'http://118.26.104.19:10520/api/user/login',
 						// url: 'http://localhost:10520/api/user/login',
 						data: {
 							username: self.form.username,
