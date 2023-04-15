@@ -3,15 +3,16 @@ import axios from 'axios'
 import App from './App.vue'
 import router from './router'
 import '../public/reset.css'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import {Table, Button, Input} from 'element-ui';
 import global from './global.vue'
 
 Vue.prototype.GLOBAL = global
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
-Vue.use(ElementUI);
+Vue.use(Table);
+Vue.use(Button);
+Vue.use(Input);
 
 new Vue({
   router,
