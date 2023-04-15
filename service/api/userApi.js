@@ -1,58 +1,57 @@
 const models = require('../db/db');
 const express = require('express');
-const router = express.Router();
+const user_router = express.Router();
 const mysql = require('mysql');
 const $sql = require('../db/sqlMap');
 
 const conn = mysql.createConnection(models.mysql);
 conn.connect();
 
-// 登录接口
-router.post('/login',(req,res)=>{
+user_router.post('/login',(req,res)=>{
 	const user = req.body;
 	const sel_username = $sql.user.select + " where username = '" + user.username + "'";
 	console.log(sel_username);
-	conn.query(sel_username, user.username, (error, results)=>{
+	conn.query(sel_username, (error, results)=>{
 		if (error) {
-			throw error;
+			console.log(error);
 		}
 		console.log(results)
 		if (results[0] === undefined) {
-			res.send("-1");  // -1 表示查询不到，用户不存在，即用户名填写错误
+			
+			res.json({code:"-1", message:"username does not exist"});
 		} else{
 			if (results[0].username == user.username && results[0].password == user.password) {
-				res.send("0");  // 0 表示用户存在并且用户名密码正确
+				res.json({code:"0", message:"login succeed"});
 			} else{
-				res.send("1");  // 1 表示用户存在，但密码不正确
+				res.json({code:"1", message:"wrong password"});
 			}
 		}
 	})
 });
 
-// 注册接口
-router.post('/add', (req, res) => {
+user_router.post('/add', (req, res) => {
 	const params = req.body;
 	const sel_sql = $sql.user.select + " where username = '" + params.username + "'";
 	const add_sql = $sql.user.add;
 	console.log(sel_sql);
 	
-	conn.query(sel_sql, params.username, (error, results) => {
+	conn.query(sel_sql, (error, results) => {
 		if(error) {
 			console.log(err);
 		}
 		if (results.length != 0 && params.username == results[0].username) {
-			res.send("-1");   // -1 表示用户名已经存在
+			res.json({code:"-1", message:"username occupied"});
 		} else {
 			conn.query(add_sql, [params.username, params.email, params.password], (err, rst) => {
 				if (err) {
 					console.log(err);
 				} else{
 					console.log(rst);
-					res.send("0"); // 0 表示用户创建成功
+					res.json({code:"0", message:"register succeed"});
 				}
 			});
 		}
 	});
 });
 
-module.exports = router;
+module.exports = user_router;

@@ -3,36 +3,36 @@
 		<div class="contain">
 			<div class="big-box" :class="{active:isLogin}">
 				<div class="big-contain" key="bigContainLogin" v-if="isLogin">
-					<div class="btitle">账户登录</div>
+					<div class="btitle">LOGIN</div>
 					<div class="bform">
-						<input type="text" placeholder="用户名" v-model="form.username">
-						<span class="errTips" v-if="usernameError">* 用户名填写错误 *</span>
-						<input type="password" placeholder="密码" v-model="form.userpwd">
-						<span class="errTips" v-if="passwordError">* 密码填写错误 *</span>
+						<input type="text" placeholder="username" v-model="form.username">
+						<span class="errTips" v-if="usernameError">* WRONG USERNAME *</span>
+						<input type="password" placeholder="password" v-model="form.userpwd">
+						<span class="errTips" v-if="passwordError">* WRONG PASSWORD *</span>
 					</div>
-					<button class="bbutton" @click="login">登录</button>
+					<button class="bbutton" @click="login">LOGIN</button>
 				</div>
 				<div class="big-contain" key="bigContainRegister" v-else>
-					<div class="btitle">创建账户</div>
+					<div class="btitle">CREATE ACCOUNT</div>
 					<div class="bform">
-						<input type="text" placeholder="用户名" v-model="form.username">
-						<span class="errTips" v-if="existed">* 用户名已经存在！ *</span>
-						<input type="email" placeholder="邮箱" v-model="form.useremail">
-						<input type="password" placeholder="密码" v-model="form.userpwd">
+						<input type="text" placeholder="username" v-model="form.username">
+						<span class="errTips" v-if="existed">* username exists! *</span>
+						<input type="email" placeholder="E-mail" v-model="form.useremail">
+						<input type="password" placeholder="password" v-model="form.userpwd">
 					</div>
-					<button class="bbutton" @click="register">注册</button>
+					<button class="bbutton" @click="register">REGISTER</button>
 				</div>
 			</div>
 			<div class="small-box" :class="{active:isLogin}">
 				<div class="small-contain" key="smallContainRegister" v-if="isLogin">
-					<div class="stitle">你好，朋友!</div>
-					<p class="scontent">开始注册，和我们一起旅行</p>
-					<button class="sbutton" @click="changeType">注册</button>
+					<div class="stitle">Hello</div>
+					<p class="scontent">register...</p>
+					<button class="sbutton" @click="changeType">REGISTER</button>
 				</div>
 				<div class="small-contain" key="smallContainLogin" v-else>
-					<div class="stitle">欢迎回来!</div>
-					<p class="scontent">与我们保持联系，请登录你的账户</p>
-					<button class="sbutton" @click="changeType">登录</button>
+					<div class="stitle">Welcome back</div>
+					<p class="scontent">Please login</p>
+					<button class="sbutton" @click="changeType">LOGIN</button>
 				</div>
 			</div>
 		</div>
@@ -49,6 +49,7 @@
 				usernameError: false,
 				passwordError: false,
 				existed: false,
+				ip: 'localhost',
 				form:{
 					username:'',
 					useremail:'',
@@ -68,23 +69,21 @@
 				if (self.form.username != "" && self.form.userpwd != "") {
 					self.$axios({
 						method:'post',
-						url: 'http://118.26.104.19:10520/api/user/login',
-						// url: 'http://localhost:10520/api/user/login',
+						url: 'http://' + this.GLOBAL.ip + ':10520/api/user/login',
 						data: {
 							username: self.form.username,
 							password: self.form.userpwd
 						}
 					})
 					.then( res => {
-						switch(res.data){
-							case 0: 
-								alert("登陆成功！");
-								this.$router.push('/home');
+						switch(res.data.code){
+							case "0": 
+								this.$router.push('home');
 								break;
-							case -1:
+							case "-1":
 								this.usernameError = true;
 								break;
-							case 1:
+							case "1":
 								this.passwordError = true;
 								break;
 						}
@@ -93,7 +92,7 @@
 						console.log(err);
 					})
 				} else{
-					alert("填写不能为空！");
+					alert('Invalid input');
 				}
 			},
 			register(){
@@ -101,8 +100,7 @@
 				if(self.form.username != "" && self.form.useremail != "" && self.form.userpwd != ""){
 					self.$axios({
 						method:'post',
-						url: 'http://118.26.104.19:10520/api/user/add',
-						// url: 'http://localhost:10520/api/user/add',
+						url: 'http://' + this.GLOBAL.ip + ':10520/api/user/add',
 						data: {
 							username: self.form.username,
 							email: self.form.useremail,
@@ -110,12 +108,12 @@
 						}
 					})
 					.then( res => {
-						switch(res.data){
-							case 0:
-								alert("注册成功！");
+						switch(res.data.code){
+							case "0":
+								alert('Register success');
 								this.login();
 								break;
-							case -1:
+							case "-1":
 								this.existed = true;
 								break;
 						}
@@ -124,7 +122,7 @@
 						console.log(err);
 					})
 				} else {
-					alert("填写不能为空！");
+					alert('Invalid input');
 				}
 			}
 		}

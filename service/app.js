@@ -4,15 +4,17 @@ const cors = require('cors')
 const app = express();
 
 const userApi = require('./api/userApi.js');
+const dataApi = require('./api/dataApi.js');
 
-// 解析 application/x-www-form-urlencoded
+
+// analysis application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// 解析 application/json
+// analysis application/json
 app.use(bodyParser.json());
 
 app.use(cors());
 
-//设置跨域请求
+//cross-domain requests
 app.all('*', function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -23,6 +25,7 @@ app.all('*', function (req, res, next) {
 });
 
 app.use("/api/user",userApi);
+app.use("/api/data",dataApi);
 
 app.listen(10520);
 console.log("success");
