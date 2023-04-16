@@ -74,7 +74,7 @@
 						url: 'http://' + this.GLOBAL.ip + ':10520/api/user/login',
 						data: {
 							username: self.form.username,
-							password: self.form.userpwd
+							password: md5(self.form.userpwd)
 						}
 					})
 					.then( res => {
@@ -109,7 +109,7 @@
 						data: {
 							username: self.form.username,
 							email: self.form.useremail,
-							password: self.form.userpwd
+							password: md5(self.form.userpwd)
 						}
 					})
 					.then( res => {
