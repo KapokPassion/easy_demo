@@ -4,8 +4,12 @@ const user_router = express.Router();
 const mysql = require('mysql');
 const $sql = require('../db/sqlMap');
 
-const conn = mysql.createConnection(models.mysql);
+let conn = mysql.createConnection(models.mysql);
 conn.connect();
+conn.on('error',err=>{
+	console.log('Re-connecting lost conn: ');
+	conn = mysql.createConnection(models.mysql);
+})
 
 user_router.post('/login',(req,res)=>{
 	const user = req.body;
