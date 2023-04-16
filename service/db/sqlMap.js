@@ -2,6 +2,8 @@ var sqlMap = {
     user: {
         add: 'insert into user (username, email, password) values (?,?,?)',
         select: 'select * from user',
+		update_failed_times: 'update user set failed_times = ? where username = ?',
+		update_block_time: 'update user set block_time = ? where username = ?'
     },
 	data: {
 		load: 'select * from cancer_prediction_data',

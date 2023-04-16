@@ -9,6 +9,7 @@
 						<span class="errTips" v-if="usernameError">* WRONG USERNAME *</span>
 						<input type="password" placeholder="password" v-model="form.userpwd">
 						<span class="errTips" v-if="passwordError">* WRONG PASSWORD *</span>
+						<span class="errTips" v-if="blockError">* BLOCKED *</span>
 					</div>
 					<button class="bbutton" @click="login">LOGIN</button>
 				</div>
@@ -48,6 +49,7 @@
 				isLogin:false,
 				usernameError: false,
 				passwordError: false,
+				blockError: false,
 				existed: false,
 				ip: 'localhost',
 				form:{
@@ -85,6 +87,9 @@
 								break;
 							case "1":
 								this.passwordError = true;
+								break;
+							case "2":
+								this.blockError = true;
 								break;
 						}
 					})
