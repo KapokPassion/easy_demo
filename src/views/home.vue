@@ -189,7 +189,7 @@
 				}
 			},
 			del(index, row) {
-				if (parseInt(row.id) == -1) {
+				if (parseInt(row.id) == -1 || parseInt(row.id) == this.row.id) {
 					this.tableData.splice(index, 1);
 					this.mode == 'normal';
 					return;
