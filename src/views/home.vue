@@ -189,7 +189,7 @@
 				}
 			},
 			del(index, row) {
-				if (parseInt(row.id) == -1 || parseInt(row.id) == this.row.id) {
+				if (parseInt(row.id) == -1) {
 					this.tableData.splice(index, 1);
 					this.mode == 'normal';
 					return;
@@ -206,6 +206,9 @@
 						.then(res => {
 							if (res.data.code = "0") {
 								alert('Deleted');
+								if (parseInt(row.id) == this.row.id) {
+									this.mode == 'normal';
+								}
 								this.tableData.splice(index, 1);
 							}
 							else if(res.data.code = "1") {
