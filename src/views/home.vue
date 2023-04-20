@@ -99,7 +99,7 @@
 							}
 						})
 						.then(res => {
-							if (res.data.code = "0") {
+							if (res.data.code == "0") {
 								res.data.data.forEach((node) => node.isShow = true);
 								that.tableData = res.data.data;
 							}
@@ -170,13 +170,13 @@
 							}
 						})
 						.then(res => {
-							if (res.data.code = "0") {
+							if (res.data.code == "0") {
 								if (id == -1) {
 									row.id = res.data.id;
 								}
 								alert('Saved');
 							}
-							else if(res.data.code = "1") {
+							else if(res.data.code == "1") {
 								alert('Server Error');
 							}
 						})
@@ -204,14 +204,14 @@
 							}
 						})
 						.then(res => {
-							if (res.data.code = "0") {
+							if (res.data.code == "0") {
 								alert('Deleted');
 								if (parseInt(row.id) == this.row.id) {
 									this.mode == 'normal';
 								}
 								this.tableData.splice(index, 1);
 							}
-							else if(res.data.code = "1") {
+							else if(res.data.code == "1") {
 								alert('Server Error');
 							}
 						})
@@ -255,11 +255,11 @@
 							}
 						})
 						.then(res => {
-							if (res.data.code = "0") {
+							if (res.data.code == "0") {
 								alert('revocered');
 								that.loadData();
 							}
-							else if(res.data.code = "1") {
+							else if(res.data.code == "1") {
 								alert('Server Error');
 							}
 						})

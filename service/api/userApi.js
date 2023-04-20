@@ -21,18 +21,18 @@ user_router.post('/login', (req, res) => {
 		}
 		console.log(results)
 		if (results[0] === undefined) {
-			res.json({
+			res.status(301).json({
 				code: "-1",
 				message: "username does not exist"
 			});
 		} else {
 			if((parseInt(Date.now() / 1000) - results[0].block_time) < 300) {
-				res.json({
+				res.status(301).json({
 					code: "2",
 					message: "blocked please wait"
 				});
 			} else if (results[0].username == user.username && results[0].password == user.password) {
-				res.json({
+				res.status(301).json({
 					code: "0",
 					message: "login succeed"
 				});
@@ -48,7 +48,7 @@ user_router.post('/login', (req, res) => {
 									if (error) {
 										console.log(error);
 									} else {
-										res.json({
+										res.status(301).json({
 											code: "2",
 											message: "blocked please wait"
 										});
@@ -63,7 +63,7 @@ user_router.post('/login', (req, res) => {
 						if (error) {
 							console.log(error);
 						} else {
-							res.json({
+							res.status(301).json({
 								code: "1",
 								message: "wrong password"
 							});
@@ -86,7 +86,7 @@ user_router.post('/add', (req, res) => {
 			console.log(err);
 		}
 		if (results.length != 0 && params.username == results[0].username) {
-			res.json({
+			res.status(301).json({
 				code: "-1",
 				message: "username occupied"
 			});
@@ -96,7 +96,7 @@ user_router.post('/add', (req, res) => {
 					console.log(err);
 				} else {
 					console.log(rst);
-					res.json({
+					res.status(301).json({
 						code: "0",
 						message: "register succeed"
 					});
